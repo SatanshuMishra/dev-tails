@@ -2,21 +2,35 @@
 import SMLogo from "../../public/SMLogo.svg";
 ---
 
-<nav class="sticky top-0 flex flex-row items-center justify-between bg-white dark:bg-black p-4 px-[10rem]">
-	<a href="/"><img src={SMLogo.src} alt="Satanshu Mishra Logo" class="h-6 w-auto" /></a>
+<nav
+	class="sticky top-0 flex flex-row items-center justify-between bg-white p-4 px-[10rem] dark:bg-[#121212] dark:text-white"
+>
+	<a href="/"
+		><img
+			src={SMLogo.src}
+			alt="Satanshu Mishra Logo"
+			class="h-6 w-auto"
+			id="SMLogo"
+		/></a
+	>
 	<div class="text-[16px]">
 		<a
-			class="after:transition-width relative mx-[8px] inline-block cursor-pointer after:absolute after:bottom-0 after:left-1/2 after:h-[1px] after:w-0 after:translate-x-[-50%] after:bg-black after:duration-300 after:ease-in-out after:content-[''] hover:after:w-full"
+			class="after:transition-width relative mx-[8px] inline-block cursor-pointer after:absolute after:bottom-0 after:left-1/2 after:h-[1px] after:w-0 after:translate-x-[-50%] after:bg-black after:duration-300 after:ease-in-out after:content-[''] hover:after:w-full dark:after:bg-white"
 			aria-disabled="true">About</a
 		>
 		<a
-			class="after:transition-width relative mx-[8px] inline-block cursor-pointer after:absolute after:bottom-0 after:left-1/2 after:h-[1px] after:w-0 after:translate-x-[-50%] after:bg-black after:duration-300 after:ease-in-out after:content-[''] hover:after:w-full"
+			class="after:transition-width relative mx-[8px] inline-block cursor-pointer after:absolute after:bottom-0 after:left-1/2 after:h-[1px] after:w-0 after:translate-x-[-50%] after:bg-black after:duration-300 after:ease-in-out after:content-[''] hover:after:w-full dark:after:bg-white"
 			aria-disabled="true">Projects</a
 		>
 		<a
-			class="after:transition-width relative mx-[8px] inline-block cursor-pointer after:absolute after:bottom-0 after:left-1/2 after:h-[1px] after:w-0 after:translate-x-[-50%] after:bg-black after:duration-300 after:ease-in-out after:content-[''] hover:after:w-full"
+			class="after:transition-width relative mx-[8px] inline-block cursor-pointer after:absolute after:bottom-0 after:left-1/2 after:h-[1px] after:w-0 after:translate-x-[-50%] after:bg-black after:duration-300 after:ease-in-out after:content-[''] hover:after:w-full dark:after:bg-white"
 			aria-disabled="true">Blog</a
 		>
 		<slot />
 	</div>
 </nav>
+
+<script>
+	if(document.querySelector("html")?.classList.contains("dark")) 
+		document.querySelector("#SMLogo").src = "../../public/SMLogoW.svg";
+</script>

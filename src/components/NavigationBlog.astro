@@ -6,14 +6,24 @@ import SMLogo from "../../public/SMLogo.svg";
 	<section
 		class="flex w-full max-w-[1280px] flex-row items-center justify-between bg-white  dark:bg-[#121212] dark:text-white"
 	>
-		<a class="translate-y-0.5" href="/"
-			><img
-				src={SMLogo.src}
-				alt="Satanshu Mishra Logo"
-				class="h-6 w-auto"
-				id="SMLogo"
-			/></a
-		>
+		<div class="flex flex-row">
+			<a class="translate-y-0.5" href="/"
+				><img
+					src={SMLogo.src}
+					alt="Satanshu Mishra Logo"
+					class="h-6 w-auto"
+					id="SMLogo"
+				/></a
+			>
+			<span class="mx-2 text-2xl font-bold text-[#bec0c3]">/</span>
+			<a href="/blog"
+				><h1
+					class="text-2xl font-semibold hover:text-gray-300 dark:text-white"
+				>
+					Blog
+				</h1></a
+			>
+		</div>
 		<div class="text-[16px]">
 			<a
 				class="after:transition-width relative mx-[8px] inline-block cursor-pointer after:absolute after:bottom-0 after:left-1/2 after:h-[1px] after:w-0 after:translate-x-[-50%] after:bg-black after:duration-300 after:ease-in-out after:content-[''] hover:after:w-full dark:after:bg-white"
@@ -22,10 +32,6 @@ import SMLogo from "../../public/SMLogo.svg";
 			<a
 				class="after:transition-width relative mx-[8px] inline-block cursor-pointer after:absolute after:bottom-0 after:left-1/2 after:h-[1px] after:w-0 after:translate-x-[-50%] after:bg-black after:duration-300 after:ease-in-out after:content-[''] hover:after:w-full dark:after:bg-white"
 				aria-disabled="true">Projects</a
-			>
-			<a
-				class="after:transition-width relative mx-[8px] inline-block cursor-pointer after:absolute after:bottom-0 after:left-1/2 after:h-[1px] after:w-0 after:translate-x-[-50%] after:bg-black after:duration-300 after:ease-in-out after:content-[''] hover:after:w-full dark:after:bg-white"
-				href="/blog">Blog</a
 			>
 			<slot />
 		</div>

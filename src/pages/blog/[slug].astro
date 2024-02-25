@@ -1,0 +1,35 @@
+---
+import LayoutBlog from "../../layouts/LayoutBlog.astro";
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+	const blogEntries = await getCollection("blog");
+	return blogEntries.map((entry) => ({
+		params: { slug: entry.slug },
+		props: { entry },
+	}));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+---
+
+<LayoutBlog title={entry.data.title}>
+	<main
+		class="flex w-full flex-row justify-center bg-white px-6 text-black dark:bg-[#121212] dark:text-white"
+	>
+		<section class="w-full max-w-[1280px] py-6">
+			<p
+				class="bg-gradient-to-r from-cyan-500 to-blue-500 font-semibold text-lg text-transparent inline-block bg-clip-text"
+			>
+				{entry.data.genre}
+			</p>
+			<h1 class="text-5xl font-extrabold text-black dark:text-white">
+				{entry.data.title}
+			</h1>
+			<img src={entry.data.image} class="rounded-xl py-6" alt="Hello World Header" />
+			<p class="text-black dark:text-white">{entry.data.description}</p>
+			<Content />
+		</section>
+	</main>
+</LayoutBlog>

@@ -77,12 +77,12 @@ const { title } = Astro.props;
 			document
 				.querySelector("#toggleIcon")
 				?.classList.replace("ri-sun-fill", "ri-moon-fill");
-			document.querySelector("#SMLogo").src = "../../public/SMLogoW.svg";
+			(document.querySelector("#SMLogo") as any).src = "../../public/SMLogoW.svg";
 		} else {
 			document
 				.querySelector("#toggleIcon")
 				?.classList.replace("ri-moon-fill", "ri-sun-fill");
-			document.querySelector("#SMLogo").src = "../../public/SMLogo.svg";
+			(document.querySelector("#SMLogo") as any).src = "../../public/SMLogo.svg";
 		}
 	};
 

@@ -34,5 +34,5 @@ import SMLogo from "../../public/SMLogo.svg";
 
 <script>
 	if (document.querySelector("html")?.classList.contains("dark"))
-		document.querySelector("#SMLogo").src = "../../public/SMLogoW.svg";
+		(document.querySelector("#SMLogo") as any).src = "../../public/SMLogoW.svg";
 </script>

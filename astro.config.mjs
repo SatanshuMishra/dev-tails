@@ -9,6 +9,8 @@ import { fromHtmlIsomorphic } from "hast-util-from-html-isomorphic";
 // import metaTags from "astro-meta-tags";
 import vercel from "@astrojs/vercel/static";
 
+//  NOTE: SMARTYPANTS: PRETTIFICATION OF PUNCTUATION. INTEGRATED INTO MD/MDX BY DEFAULT. [ADDITIONAL DEPENDENCY AVAILABLE]
+
 export default defineConfig({
 	output: "static",
 	adapter: vercel({
@@ -18,11 +20,14 @@ export default defineConfig({
 	}),
 	markdown: {
 		remarkPlugins: [
+			//  NOTE: TABLE OF CONTENTS BUILDER
 			remarkToc,
 		],
 		rehypePlugins: [
+			//  NOTE: ASSIGNS ID'S TO HEADINGS BASED ON HEADING CONTENT [NORMALIZED - REMOVES SPECIAL CHARS, PUNCTUATION, ETC.]
 			rehypeHeadingIds,
 			[
+				//  NOTE: GENERATES THE AUTO LINKS NEXT TO HEADINGS [REQUIRES rehypePlugins]
 				rehypeAutolinkHeadings,
 				{
 					behavior: "append",

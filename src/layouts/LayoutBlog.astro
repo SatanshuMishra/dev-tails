@@ -1,26 +1,32 @@
 ---
 import Navigation from "../components/NavigationBlog.astro";
 import ThemeToggle from "../components/ThemeToggle.astro";
+import TableOfContent from "../components/TableOfContent.astro";
 import Footer from "../components/Footer.astro";
 
-interface Props {
-	title: string;
-}
-
-const { title } = Astro.props;
+const { frontmatter, headings } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en" class={"dark bg-white dark:bg-[#121212]"}>
+<html lang="en" class={"dark bg-white dark:bg-[#010409]"}>
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="description" content="Astro description" />
 		<meta name="viewport" content="width=device-width" />
 
-		<meta property="og:title" content={title} />
-		<meta property="og:description" content="A brief description of your page content" />
-		<meta property="og:image" content="../../public/fce212fe-4756-4643-8170-2e03c755f87e.svg" /> 
-		<meta property="og:url" content="../pages/blog/fce212fe-4756-4643-8170-2e03c755f87e.astro" />
+		<meta property="og:title" content={frontmatter.title} />
+		<meta
+			property="og:description"
+			content="A brief description of your page content"
+		/>
+		<meta
+			property="og:image"
+			content="../../public/fce212fe-4756-4643-8170-2e03c755f87e.svg"
+		/>
+		<meta
+			property="og:url"
+			content="../pages/blog/fce212fe-4756-4643-8170-2e03c755f87e.astro"
+		/>
 		<meta property="og:type" content="website" />
 
 		<link
@@ -46,13 +52,37 @@ const { title } = Astro.props;
 		<meta name="theme-color" content="#ffffff" />
 
 		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
+		<title>{frontmatter.title}</title>
 	</head>
 	<body>
 		<Navigation>
 			<ThemeToggle />
 		</Navigation>
-		<slot />
+		<main
+			class="flex w-full flex-row justify-center bg-white px-6 text-black dark:bg-[#010409] dark:text-white"
+		>
+			<section class="w-full max-w-[1280px] py-6">
+				<h1>{frontmatter.title}</h1>
+				<p
+					class="bg-gradient-to-r from-cyan-500 to-blue-500 font-semibold text-lg text-transparent inline-block bg-clip-text"
+				>
+					{frontmatter.genre}
+				</p>
+				<h1 class="text-5xl font-extrabold text-black dark:text-white">
+					{frontmatter.title}
+				</h1>
+				<p class="text-black dark:text-white">
+					{frontmatter.description}
+				</p>
+				<img
+					src={frontmatter.image}
+					class="rounded-xl py-6"
+					alt="Hello World Header"
+				/>
+				<TableOfContent headings={headings} />
+				<slot />
+			</section>
+		</main>
 		<Footer />
 	</body>
 </html>

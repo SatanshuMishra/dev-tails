@@ -4,8 +4,12 @@ import TableOfContentsHeading from "./TableOfContentsHeading.astro";
 const { headings } = Astro.props;
 const toc = buildToc(headings);
 
+export interface TableOfContents {
+	depth: number; text: string; slug: string; subheadings: TableOfContents[];
+}
+
 function buildToc(headings: {depth: number; text: string; slug: string; }[]) {
-  const toc = [];
+  const toc: TableOfContents[] = [];
   const parentHeadings = new Map();
   headings.forEach((h) => {
     const heading = { ...h, subheadings: [] };

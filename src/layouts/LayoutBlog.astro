@@ -12,19 +12,18 @@ const { frontmatter, headings } = Astro.props;
 		<ThemeToggle />
 	</Navigation>
 	<main
-		class="flex w-full flex-row justify-center bg-white px-6 text-black dark:bg-[#010409] dark:text-white"
+		class="flex w-full flex-row justify-center bg-lightBackground px-6 text-lightText dark:bg-darkBackground dark:text-darkText"
 	>
 		<section class="w-full max-w-[1280px] py-6">
-			<h1>{frontmatter.title}</h1>
 			<p
 				class="bg-gradient-to-r from-cyan-500 to-blue-500 font-semibold text-lg text-transparent inline-block bg-clip-text"
 			>
 				{frontmatter.genre}
 			</p>
-			<h1 class="text-5xl font-extrabold text-black dark:text-white">
+			<h1 class="text-5xl font-extrabold">
 				{frontmatter.title}
 			</h1>
-			<p class="text-black dark:text-white">
+			<p>
 				{frontmatter.description}
 			</p>
 			<img
@@ -32,7 +31,7 @@ const { frontmatter, headings } = Astro.props;
 				class="rounded-xl py-6"
 				alt="Hello World Header"
 			/>
-			{/* <TableOfContent headings={headings} />*/}
+			<TableOfContent headings={headings} />			
 			<slot />
 		</section>
 	</main>

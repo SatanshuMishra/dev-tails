@@ -39,7 +39,9 @@ export default defineConfig({
 		],
 	},
 	integrations: [
-		tailwind(),
+		tailwind({
+			configFile: './tailwind.config.mjs',
+		}),
  		// expressiveCode(astroExpressiveCodeOptions),
 		mdx(),
 		// metaTags(),

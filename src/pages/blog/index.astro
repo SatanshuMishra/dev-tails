@@ -1,4 +1,20 @@
 ---
-import LayoutBlog from "../../layouts/LayoutBlog.astro"
----
+import LayoutBlogList from "../../layouts/LayoutBlogList.astro";
+import BlogCard from "../../components/BlogCard.astro";
+import { getCollection } from "astro:content";
 
+const blogPosts = await getCollection("blog");
+console.log(blogPosts[0].data.title);
+---
+<LayoutBlogList title="My Blogs">
+	<div class="grid grid-cols-2 p-2">
+		<BlogCard imageUrl={blogPosts[0].data.image} tags={blogPosts[0].data.tags} title={blogPosts[0].data.title} description={blogPosts[0].data.description} slug={blogPosts[0].slug} featuredPost={true} />
+		<div class="grid grid-cols-1">
+			{
+				blogPosts.map((blogPostEntry) => (
+					<BlogCard imageUrl={blogPosts[0].data.image} tags={blogPosts[0].data.tags} title={blogPosts[0].data.title} description={blogPosts[0].data.description} slug={blogPosts[0].slug} />
+				))
+			}
+		</div>
+	</div>
+</LayoutBlogList>

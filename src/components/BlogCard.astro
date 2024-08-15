@@ -1,0 +1,47 @@
+---
+interface Props {
+	imageUrl: string;
+	tags: string[];
+	title: string;
+	description: string;
+	slug: string;
+	featuredPost?: boolean;
+}
+const { imageUrl, tags, title, description, slug, featuredPost = false } = Astro.props;
+---
+
+{
+	featuredPost && (
+		<div class="p-2">
+			<img src=`${imageUrl}` alt="" />
+			<div class="pt-2 pb-0.5">
+			{
+				tags.map(tagEntry => (
+					<p class="bg-gradient-to-r from-cyan-500 to-blue-500 font-semibold text-lg text-transparent inline-block bg-clip-text">{tagEntry[0].toUpperCase() + tagEntry.slice(1,)}</p>
+				))
+			}
+			</div>
+			<h1 class="font-bold text-3xl hover:underline underline-offset-2 hover:text-cyan-500"><a href=`blog/${slug}`>{title}</a></h1>
+			<p class="text-lg py-1">{description}</p>
+		</div>
+	)
+}
+{
+	!featuredPost && (
+		<div class="relative p-2 flex flex-row justify-start items-start">
+			<img src=`${imageUrl}` alt="" class="w-auto h-[10rem]"/>
+			<div class="order-1 flex flex-col justify-start items-start flex-1 px-2">
+			<div class="pt-2 pb-0.5">
+			{
+				tags.map(tagEntry => (
+					<p class="bg-gradient-to-r from-cyan-500 to-blue-500 font-semibold text-lg text-transparent inline-block bg-clip-text">{tagEntry[0].toUpperCase() + tagEntry.slice(1,)}</p>
+				))
+			}
+			</div>
+			<h1 class="font-bold text-xl hover:underline underline-offset-2 hover:text-cyan-500"><a href=`blog/${slug}`>{title}</a></h1>
+			<p class="text-lg py-1">{description}</p>
+			</div>
+		</div>
+	)
+}
+

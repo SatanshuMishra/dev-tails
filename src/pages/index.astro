@@ -1,53 +1,8 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import Header from "../components/sections/home/header.astro";
 ---
 
 <Layout title="Satanshu Mishra">
-	<main class="flex flex-row justify-center items-center w-full px-6 bg-white dark:bg-[#010409]">
-		<section class="max-w-[1280px] flex h-[80vh] flex-row-reverse py-52">
-			<div class="flex flex-col items-end justify-center">
-				<h1 class="text-7xl text-[#343a40] dark:text-white">Satanshu Mishra</h1>
-				<p class="py-5 text-[1.2rem] font-semibold text-[#343a40] dark:text-white">
-					SOFTWARE ENGINEER
-				</p>
-				<p
-					class="max-w-[70%] py-5 text-right text-[1.2rem] font-light text-[#343a40] dark:text-white"
-				>
-					👋 Thanks for dropping by! I'm Satanshu Mishra. Driven by
-					curiosity, I explore new technologies to create accessible
-					and impactful software solutions.
-				</p>
-				<div class="flex flex-row items-end justify-center text-3xl">
-					<a
-						class="mx-[4px] text-[#343a40] transition-all duration-200 ease-in-out hover:text-black dark:text-white dark:hover:text-gray-300"
-						href="https://github.com/SatanshuMishra"
-						target="_blank"
-						><i aria-label="GitHub" class="ri-github-fill"></i></a
-					>
-					<a
-						class="mx-[4px] text-[#343a40] duration-200 ease-in-out hover:text-black dark:text-white dark:hover:text-gray-300"
-						href="https://www.linkedin.com/in/satanshumishra/"
-						target="_blank"
-						><i aria-label="LinkedIn" class="ri-linkedin-box-fill"
-						></i></a
-					>
-					<a
-						class="mx-[4px] text-[#343a40] duration-200 ease-in-out hover:text-black dark:text-white dark:hover:text-gray-300"
-						href="https://bsky.app/profile/satanshumishra.bsky.social"
-						target="_blank"
-						><i aria-label="Bluesky" class="ri-bluesky-fill"></i></a
-					>
-				</div>
-				<a
-					href="https://drive.google.com/file/d/1iXpb7dG6iTVUUENyHGTDQwly_FEMg0yP/view?usp=drive_link"
-					target="_blank"
-					><div
-						class="my-5 rounded-md border-[1px] bg-white p-2 text-black transition-all duration-500 hover:cursor-pointer hover:bg-[#343a40] hover:text-white dark:border-white dark:text-white dark:bg-transparent dark:hover:bg-white dark:hover:text-black"
-					>
-						<p>Curriculum Vitae</p>
-					</div>
-				</a>
-			</div>
-		</section>
-	</main>
+	<Header />
 </Layout>

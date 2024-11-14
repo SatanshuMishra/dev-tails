@@ -5,7 +5,7 @@ const { frontmatter } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en" class={"dark bg-white dark:bg-[#010409]"}>
+<html lang="en" class={"light bg-white dark:bg-[#010409]"}>
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="description" content="Astro description" />
@@ -106,6 +106,7 @@ const { frontmatter } = Astro.props;
 </script>
 <style>
 	@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200..1000&family=Open+Sans:wdth,wght@75..100,300..800&display=swap");
+	@import url("https://api.fontshare.com/v2/css?f[]=satoshi@1,2&display=swap");
 	.open-sans-<uniquifier > {
 		font-family: "Open Sans", sans-serif;
 		font-optical-sizing: auto;
@@ -119,7 +120,13 @@ const { frontmatter } = Astro.props;
 		font-weight: <weight>;
 		font-style: normal;
 	}
+	.satoshi-<uniquifier > {
+		font-family: 'Satoshi', sans-serif;
+		font-optical-sizing: auto;
+		font-weight: <weight>;
+		font-style: normal;
+	}
 	* {
-		font-family: "Open Sans";
+		font-family: "Satoshi";
 	}
 </style>

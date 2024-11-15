@@ -1,0 +1,48 @@
+---
+import "remixicon/fonts/remixicon.css";
+import ProjectCard from "./reusables/project-card.astro";
+---
+
+<section
+	class="relative w-full h-screen flex flex-col justify-center items-start border-2 border-black border-dotted overflow-hidden"
+>
+	<section class="py-10">
+		<h1 class="font-bold text-6xl text-black dark:text-white">My Work</h1>
+		<p
+			class="max-w-[70%] py-5 text-left text-[1.4rem] font-normal text-black dark:text-white"
+		>
+			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+			varius enim in eros elementum tristique.
+		</p>
+		<div id="show-all-projects" class="flex flex-row gap-2 hover:cursor-pointer">
+			<p class="text-[1.4rem] font-bold">See All Projects</p>
+			<i id="projects-arrow" class="ri-arrow-right-line text-3xl" style="transform: rotate(-40deg);"></i>
+		</div>
+	</section>
+
+	<section class="w-full">
+		<div
+			class="flex flex-row gap-10 overflow-x-auto pb-4 scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-700"
+		>
+			<ProjectCard name="Project A" website="" repo="" preview="" />
+			<ProjectCard name="Project B" repo="" preview="" />
+			<ProjectCard name="Project C" website="" repo="" preview="" />
+			<ProjectCard name="Project D" repo="" preview="" />
+			<ProjectCard name="Project E" repo="" preview="" />
+		</div>
+	</section>
+</section>
+
+<script>
+	let button = document.querySelector("#show-all-projects");
+	let arrow = document.querySelector("#projects-arrow");
+
+	button?.addEventListener("mouseover", () => {
+		arrow.style.transform = "rotate(0deg)";
+		arrow.style.transition = "transform 0.3s ease";
+	});
+
+	button?.addEventListener("mouseout", () => {
+		arrow.style.transform = "rotate(-40deg)";
+	});
+</script>

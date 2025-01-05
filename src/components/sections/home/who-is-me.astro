@@ -1,11 +1,15 @@
+---
+import SectionTitle from "../../ui/SectionTitle.astro";
+---
+
 <section
 	class="w-full h-auto flex flex-row justify-center items-start bg-white dark:bg-[#010409] border-2 border-black border-dotted reveal-section"
 >
 	<section>
 		<div class="py-10">
-			<h1 class="font-bold text-6xl text-black dark:text-white reveal-element-B opacity-0 translate-y-[-20px]">
-				Finding Solutions for real-world problems
-			</h1>
+			<SectionTitle animationClass="reveal-element-B"
+				>Finding Solutions for real-world problems</SectionTitle
+			>
 			<p
 				class="max-w-[70%] py-5 text-left text-[1.4rem] font-normal text-black dark:text-white reveal-element-B opacity-0 translate-y-[-20px]"
 			>
@@ -16,36 +20,43 @@
 				mattis ullamcorper velit.
 			</p>
 		</div>
-		<div class="bg-black w-[45rem] h-[25rem] reveal-element-B opacity-0 translate-y-[-20px]"></div>
+		<div
+			class="bg-black w-[45rem] h-[25rem] reveal-element-B opacity-0 translate-y-[-20px]"
+		>
+		</div>
 	</section>
 	<section>
-		<div class="bg-black w-[30rem] h-[35rem] reveal-element-B opacity-0 translate-y-[-20px]"></div>
+		<div
+			class="bg-black w-[30rem] h-[35rem] reveal-element-B opacity-0 translate-y-[-20px]"
+		>
+		</div>
 	</section>
 </section>
 
 <script is:inline>
-	document.addEventListener('DOMContentLoaded', function() {
+	document.addEventListener("DOMContentLoaded", function () {
 		gsap.registerPlugin(ScrollTrigger);
 
 		function createRevealAnimations() {
-			const revealElements = document.querySelectorAll('.reveal-element-B');
+			const revealElements =
+				document.querySelectorAll(".reveal-element-B");
 
 			revealElements.forEach((element, index) => {
 				gsap.to(element, {
 					scrollTrigger: {
 						trigger: element,
-						start: "top bottom-=100", 
+						start: "top bottom-=100",
 						toggleActions: "play none none reverse",
 					},
-					y: 0, 
+					y: 0,
 					opacity: 1,
 					duration: 1,
-					delay: index * 0.2, 
-					ease: "power2.out", 
+					delay: index * 0.2,
+					ease: "power2.out",
 					onComplete: () => {
-						element.style.transform = 'none';
-						element.style.opacity = '1';
-					}
+						element.style.transform = "none";
+						element.style.opacity = "1";
+					},
 				});
 			});
 		}
@@ -56,5 +67,11 @@
 	});
 </script>
 
-<script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-<script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script
+	is:inline
+	src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"
+></script>
+<script
+	is:inline
+	src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"
+></script>

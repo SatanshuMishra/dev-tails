@@ -4,26 +4,33 @@ import ProjectCard from "./reusables/project-card.astro";
 ---
 
 <section
-	class="relative w-full h-screen flex flex-col justify-center items-start border-2 border-black border-dotted overflow-hidden"
+	class="projects-container relative w-full h-[100vh] flex flex-col justify-center items-start border-2 border-black border-dotted overflow-hidden"
 >
 	<section class="py-10">
-		<h1 class="font-bold text-6xl text-black dark:text-white">My Work</h1>
+		<h1
+			class="reveal-element-C font-bold text-6xl text-black dark:text-white opacity-0 translate-y-[-50px]"
+		>
+			My Work
+		</h1>
 		<p
-			class="max-w-[70%] py-5 text-left text-[1.4rem] font-normal text-black dark:text-white"
+			class="reveal-element-C max-w-[70%] py-5 text-left text-[1.4rem] font-normal text-black dark:text-white opacity-0 translate-y-[-50px]"
 		>
 			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
 			varius enim in eros elementum tristique.
 		</p>
-		<div id="show-all-projects" class="flex flex-row gap-2 hover:cursor-pointer">
+		<div
+			id="show-all-projects"
+			class="reveal-element-C flex flex-row gap-2 hover:cursor-pointer opacity-0 translate-y-[-50px]"
+		>
 			<p class="text-[1.4rem] font-bold">See All Projects</p>
-			<i id="projects-arrow" class="ri-arrow-right-line text-3xl" style="transform: rotate(-40deg);"></i>
+			<i
+				id="projects-arrow"
+				class="ri-arrow-right-line text-3xl"
+				style="transform: rotate(-40deg);"></i>
 		</div>
 	</section>
-
-	<section class="w-full">
-		<div
-			class="flex flex-row gap-10 overflow-x-auto pb-4 scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-700"
-		>
+	<section class="w-full h-auto sticky top-0">
+		<div class="project-cards-container flex flex-row gap-10 pl-4">
 			<ProjectCard name="Project A" website="" repo="" preview="" />
 			<ProjectCard name="Project B" repo="" preview="" />
 			<ProjectCard name="Project C" website="" repo="" preview="" />
@@ -33,16 +40,134 @@ import ProjectCard from "./reusables/project-card.astro";
 	</section>
 </section>
 
-<script>
-	let button = document.querySelector("#show-all-projects");
-	let arrow = document.querySelector("#projects-arrow");
+<!-- Add GSAP and ScrollTrigger CDN links -->
+<script
+	is:inline
+	src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"
+></script>
+<script
+	is:inline
+	src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"
+></script>
 
-	button?.addEventListener("mouseover", () => {
-		arrow.style.transform = "rotate(0deg)";
-		arrow.style.transition = "transform 0.3s ease";
-	});
+<script is:inline>
+	document.addEventListener("DOMContentLoaded", function () {
+		gsap.registerPlugin(ScrollTrigger);
 
-	button?.addEventListener("mouseout", () => {
-		arrow.style.transform = "rotate(-40deg)";
+		// Handle reveal animations for text elements
+		const revealElements = document.querySelectorAll(".reveal-element-C");
+		revealElements.forEach((element, index) => {
+			gsap.to(element, {
+				scrollTrigger: {
+					trigger: element,
+					start: "top bottom-=100",
+					toggleActions: "play none none reverse",
+				},
+				y: 0,
+				opacity: 1,
+				duration: 1,
+				delay: index * 0.2,
+				ease: "power2.out",
+				onComplete: () => {
+					element.style.transform = "none";
+					element.style.opacity = "1";
+				},
+			});
+		});
+
+		const container = document.querySelector(".projects-container");
+		const horizontalSection = document.querySelector(
+			".project-cards-container",
+		);
+
+		if (container && horizontalSection) {
+			function updateScroll() {
+				// Kill existing ScrollTrigger instance if it exists
+				if (ScrollTrigger.getById("horizontal-scroll")) {
+					ScrollTrigger.getById("horizontal-scroll").kill();
+				}
+
+				// Calculate the total width of all cards including gaps
+				const projectCards = horizontalSection.children;
+				let totalCardsWidth = 0;
+				for (let card of projectCards) {
+					const cardStyle = window.getComputedStyle(card);
+					const marginRight = parseInt(cardStyle.marginRight);
+					totalCardsWidth += card.offsetWidth + marginRight;
+				}
+
+				// Add extra padding to ensure last card is fully visible
+				const containerWidth = container.offsetWidth;
+				const extraPadding = 200; // Adjust this value as needed
+				const totalScroll =
+					totalCardsWidth + extraPadding - containerWidth;
+
+				// Reset horizontal position
+				gsap.set(horizontalSection, { x: 0 });
+
+				// Only create scroll animation if content is wider than container
+				if (totalCardsWidth > containerWidth) {
+					gsap.to(horizontalSection, {
+						x: -totalScroll,
+						ease: "none",
+						scrollTrigger: {
+							id: "horizontal-scroll",
+							trigger: container,
+							start: "top top",
+							end: () => `+=${totalScroll + containerWidth}`, // Add container width to ensure full scroll
+							pin: true,
+							scrub: 1,
+							invalidateOnRefresh: true,
+							anticipatePin: 1,
+							pinSpacing: true,
+							onRefresh: (self) => {
+								const newTotalScroll =
+									totalCardsWidth +
+									extraPadding -
+									containerWidth;
+								self.end = `+=${newTotalScroll + containerWidth}`;
+							},
+						},
+					});
+				} else {
+					// If content is narrower than container, switch to regular layout
+					horizontalSection.style.overflow = "auto";
+					horizontalSection.style.flexWrap = "wrap";
+				}
+			}
+
+			// Initial setup
+			updateScroll();
+
+			// Handle window resize
+			const debouncedUpdate = gsap.utils.debounce(() => {
+				horizontalSection.style.transform = "";
+				horizontalSection.style.overflow = "";
+				horizontalSection.style.flexWrap = "";
+				updateScroll();
+			}, 100);
+
+			window.addEventListener("resize", debouncedUpdate);
+		}
+
+		// Handle arrow animation
+		let button = document.querySelector("#show-all-projects");
+		let arrow = document.querySelector("#projects-arrow");
+
+		button?.addEventListener("mouseover", () => {
+			gsap.to(arrow, {
+				rotation: 0,
+				duration: 0.3,
+				ease: "power2.out",
+			});
+		});
+
+		button?.addEventListener("mouseout", () => {
+			gsap.to(arrow, {
+				rotation: -40,
+				duration: 0.3,
+				ease: "power2.out",
+			});
+		});
 	});
 </script>

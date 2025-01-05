@@ -1,52 +1,61 @@
----
----
-
 <section
 	class="flex flex-row justify-center items-center w-full bg-white dark:bg-[#010409] border-2 border-black border-dotted"
 >
 	<section class="w-screen h-screen flex flex-row py-52">
 		<div class="flex flex-col items-start justify-center">
-			<h1 class="font-bold text-7xl text-black dark:text-white">
+			<p class="text-[1.4rem] text-black dark:text-white font-normal">
+				Hey! I'm
+			</p>
+			<h1
+				class="reveal-element font-bold text-7xl opacity-0 translate-x-[20px] text-blue-500"
+			>
 				Satanshu Mishra
 			</h1>
 			<p
 				id="skills-n-interests"
-				class="h-14 min-h-14 py-5 text-[1.8rem] font-semibold text-black dark:text-white flex flex-row items-center"
+				class="reveal-element h-14 min-h-14 py-5 text-[1.8rem] font-semibold text-black dark:text-white flex flex-row items-center opacity-0 translate-x-[20px]"
 			>
 			</p>
 			<p
-				class="max-w-[70%] py-5 text-left text-[1.4rem] font-normal text-black dark:text-white"
+				class="reveal-element max-w-[70%] py-5 text-left text-[1.4rem] font-normal text-black dark:text-white opacity-0 translate-x-[20px]"
 			>
-				👋 Thanks for dropping by! I'm Satanshu Mishra. Driven by
-				curiosity, I explore new technologies to create accessible and
-				impactful software solutions.
+				👋 Thanks for dropping by! Driven by curiosity, I explore new
+				technologies to create accessible and impactful software
+				solutions.
 			</p>
-			<div class="flex flex-row items-end justify-center text-4xl gap-4">
+			<div
+				class="reveal-element flex flex-row items-end justify-center text-4xl gap-4 opacity-0 translate-x-[20px]"
+			>
 				<a
-					class="transition-all duration-200 ease-in-out hover:text-black dark:text-white dark:hover:text-gray-300"
+					class="transition-all duration-200 ease-in-out hover:text-black dark:text-white dark:hover:text-gray-300 flex flex-row gap-2"
 					href="https://github.com/SatanshuMishra"
 					target="_blank"
-					><i aria-label="GitHub" class="ri-github-fill"></i></a
-				>
+					><i aria-label="GitHub" class="ri-github-fill"></i>
+					<p class="text-[1.2rem]">GitHub</p>
+				</a>
 				<a
-					class="duration-200 ease-in-out hover:text-black dark:text-white dark:hover:text-gray-300"
+					class="transition-all duration-200 ease-in-out hover:text-black dark:text-white dark:hover:text-gray-300 flex flex-row gap-2"
 					href="https://www.linkedin.com/in/satanshumishra/"
 					target="_blank"
 					><i aria-label="LinkedIn" class="ri-linkedin-box-fill"
-					></i></a
+					></i><p class="text-[1.2rem]">LinkedIn</p></a
 				>
 				<a
-					class="duration-200 ease-in-out hover:text-black dark:text-white dark:hover:text-gray-300"
+					class="transition-all duration-200 ease-in-out hover:text-black dark:text-white dark:hover:text-gray-300 flex flex-row gap-2"
 					href="https://bsky.app/profile/satanshumishra.bsky.social"
 					target="_blank"
-					><i aria-label="Bluesky" class="ri-bluesky-fill"></i></a
+					><i aria-label="Bluesky" class="ri-bluesky-fill"></i><p
+						class="text-[1.2rem]"
+					>
+						Bluesky
+					</p></a
 				>
 			</div>
 			<a
 				href="https://drive.google.com/file/d/1iXpb7dG6iTVUUENyHGTDQwly_FEMg0yP/view?usp=drive_link"
 				target="_blank"
 				><div
-					class="my-5 rounded-md border-[1px] bg-white p-2 text-black transition-all duration-500 hover:cursor-pointer hover:bg-[#343a40] hover:text-white dark:border-white dark:text-white dark:bg-transparent dark:hover:bg-white dark:hover:text-black"
+					class="reveal-element my-5 rounded-md border-[1px] bg-white p-2 text-black transition-all duration-500 hover:cursor-pointer hover:bg-[#343a40] hover:text-white dark:border-white dark:text-white dark:bg-transparent dark:hover:bg-white dark:hover:text-black opacity-0 translate-x-[20px]"
 				>
 					<p>Curriculum Vitae</p>
 				</div>
@@ -55,21 +64,66 @@
 	</section>
 </section>
 
-<script>
-	import Typed from "typed.js";
-	let typed = new Typed("#skills-n-interests", {
-		strings: [
-			"SOFTWARE DEVELOPER",
-			"CYBERSECURITY ENTHUSIAST",
-			"SPACE AFICIONADO",
-		],
-		typeSpeed: 40,
-		backSpeed: 40,
-		smartBackspace: true,
-		backDelay: 2000,
-		shuffle: false,
-		loop: true,
-		loopCount: Infinity,
-		showCursor: false,
+<style>
+	.gradient-text {
+		background: linear-gradient(180deg, #5d95e9 0%, #397aec 100%);
+		-webkit-background-clip: text;
+		background-clip: text;
+		color: transparent;
+		display: inline-block;
+	}
+</style>
+
+<!-- Add GSAP CDN -->
+<script
+	is:inline
+	src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"
+></script>
+
+<!-- Add Typed.js CDN -->
+<script is:inline src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+
+<script is:inline>
+	// Wait for DOM to be loaded
+	document.addEventListener("DOMContentLoaded", function () {
+		// Initialize Typed.js
+		let typed = new Typed("#skills-n-interests", {
+			strings: [
+				"SOFTWARE DEVELOPER",
+				"CYBERSECURITY ENTHUSIAST",
+				"SPACE AFICIONADO",
+			],
+			typeSpeed: 40,
+			backSpeed: 40,
+			smartBackspace: true,
+			backDelay: 2000,
+			shuffle: false,
+			loop: true,
+			loopCount: Infinity,
+			showCursor: false,
+		});
+
+		// Initialize GSAP animations
+		const revealElements = document.querySelectorAll(".reveal-element");
+
+		// Create a timeline for sequential animations
+		const tl = gsap.timeline({
+			defaults: { duration: 1, ease: "power3.out" },
+		});
+
+		// Add each element to the timeline with stagger
+		tl.to(revealElements, {
+			x: 0,
+			opacity: 1,
+			duration: 1,
+			stagger: 0.2,
+			ease: "power3.out",
+			onComplete: () => {
+				// Remove inline styles after animation
+				revealElements.forEach((element) => {
+					element.style.transform = "none";
+				});
+			},
+		});
 	});
 </script>

@@ -1,0 +1,46 @@
+---
+import "remixicon/fonts/remixicon.css";
+import ProjectCard from "./reusables/project-card.astro";
+import SectionTitle from "../../ui/SectionTitle.astro";
+---
+
+<section
+	class="w-full min-h-screen flex flex-col justify-start items-start gap-10"
+>
+	<SectionTitle>Projects</SectionTitle>
+	<div class="flex flex-row justify-center items-start gap-10 flex-wrap">
+		<ProjectCard
+			name="MaptyDo"
+			website="satanshumishra.github.io/maptyDo/"
+			repo="https://github.com/SatanshuMishra/maptyDo?tab=readme-ov-file"
+			preview="MaptyDo.svg"
+		/>
+		<ProjectCard
+			name="DiscussIt"
+			repo="https://github.com/SatanshuMishra/discussIt"
+			preview="DiscussIt.svg"
+		/>
+		<ProjectCard
+			name="ImmuniBee"
+			website="https://2023.igem.wiki/ubc-okanagan/"
+			repo="https://gitlab.igem.org/2023/ubc-okanagan"
+			preview="ImmuniBee.svg"
+		/>
+		<ProjectCard
+			name="DNAdapter"
+			website="https://i-gem-dna-calculator.vercel.app/"
+			repo="https://github.com/SatanshuMishra/iGEM-dna-calculator"
+			preview="DNAdapter.svg"
+		/>
+		<ProjectCard
+			name="uLearn"
+			repo="https://github.com/SatanshuMishra/uLearn"
+			preview="uLearn.svg"
+		/>
+		<ProjectCard
+			name="Capstone Application"
+			repo="https://github.com/COSC-499-W2023/year-long-project-team-10"
+			preview="CapstoneApp.svg"
+		/>
+	</div>
+</section>

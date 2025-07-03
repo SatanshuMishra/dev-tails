@@ -1,0 +1,33 @@
+---
+interface Props {
+	name: string;
+	website?: string;
+	repo: string;
+	preview: string;
+}
+const { name, website = "", repo, preview } = Astro.props;
+---
+
+<div class="project-card min-w-[30rem]">
+	<!-- Added min-width to ensure proper horizontal scrolling -->
+	<img src={`/previews/${preview}`} class="w-[40rem] h-[25rem] rounded-lg" />
+	<div class="flex flex-row justify-between">
+		<p
+			class="h-14 min-h-14 py-5 text-[1.8rem] font-semibold text-black dark:text-white flex flex-row items-center"
+		>
+			{name}
+		</p>
+		<div
+			class="flex flex-row justify-end items-center h-14 min-h-14 py-5 gap-2 text-[1.8rem]"
+		>
+			{
+				website && (
+					<a href={repo}>
+						<i class="ri-external-link-fill" />
+					</a>
+				)
+			}
+			<a href={website}><i class="ri-github-fill"></i></a>
+		</div>
+	</div>
+</div>

@@ -3,8 +3,35 @@
 	class="fixed inset-0 bg-[#010409] dark:bg-[#010409] z-[9999] flex items-center justify-center"
 >
 	<div class="text-center">
-		<h2 id="hello-text" class="text-6xl font-bold text-white opacity-0">
+		<h2
+			id="hello-en"
+			class="text-6xl font-bold text-white opacity-0 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+		>
 			Hello
+		</h2>
+		<h2
+			id="hello-fr"
+			class="text-6xl font-bold text-white opacity-0 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+		>
+			Bonjour
+		</h2>
+		<h2
+			id="hello-ua"
+			class="text-6xl font-bold text-white opacity-0 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+		>
+			Привіт
+		</h2>
+		<h2
+			id="hello-es"
+			class="text-6xl font-bold text-white opacity-0 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+		>
+			Hola
+		</h2>
+		<h2
+			id="hello-hi"
+			class="text-6xl font-bold text-white opacity-0 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+		>
+			नमस्ते
 		</h2>
 	</div>
 </div>
@@ -46,12 +73,12 @@
 				});
 				// ANIMATE THE HELLO TEXT
 				timeline
-					.to("#hello-text", {
+					.to("#hello-en", {
 						opacity: 1,
 						duration: 1,
 						ease: "power2.inOut",
 					})
-					.to("#hello-text", {
+					.to("#hello-en", {
 						opacity: 1,
 						duration: 1,
 						delay: 1,

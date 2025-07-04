@@ -1,37 +1,37 @@
 <div
 	id="preloader"
-	class="fixed inset-0 bg-[#010409] dark:bg-[#010409] z-[9999] flex items-center justify-center"
+	class="fixed inset-0 bg-[#0e100f] dark:bg-[#0e100f] z-[9999] flex items-center justify-center"
 >
 	<div class="text-center">
 		<h2
 			id="hello-en"
-			class="text-6xl font-bold text-white opacity-0 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+			class="text-6xl font-normal text-[#c2c3b0] opacity-0 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
 		>
-			Hello
+			&#x2022; Hello
 		</h2>
 		<h2
 			id="hello-fr"
-			class="text-6xl font-bold text-white opacity-0 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+			class="text-6xl font-normal text-[#c2c3b0] opacity-0 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
 		>
-			Bonjour
+			&#x2022; Bonjour
 		</h2>
 		<h2
 			id="hello-ua"
-			class="text-6xl font-bold text-white opacity-0 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+			class="text-6xl font-normal text-[#c2c3b0] opacity-0 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
 		>
-			Привіт
+			&#x2022; Привіт
 		</h2>
 		<h2
 			id="hello-es"
-			class="text-6xl font-bold text-white opacity-0 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+			class="text-6xl font-normal text-[#c2c3b0] opacity-0 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
 		>
-			Hola
+			&#x2022; Hola
 		</h2>
 		<h2
 			id="hello-hi"
-			class="text-6xl font-bold text-white opacity-0 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+			class="text-6xl font-normal text-[#c2c3b0] opacity-0 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
 		>
-			नमस्ते
+			&#x2022; नमस्ते
 		</h2>
 	</div>
 </div>
@@ -79,9 +79,61 @@
 						ease: "power2.inOut",
 					})
 					.to("#hello-en", {
+						opacity: 0,
+						duration: 0,
+						delay: 0.2,
+						ease: "power2.inOut",
+					})
+
+					// FRENCH
+					.to("#hello-fr", {
 						opacity: 1,
-						duration: 1,
-						delay: 1,
+						duration: 0,
+						ease: "power2.inOut",
+					})
+					.to("#hello-fr", {
+						opacity: 0,
+						duration: 0,
+						delay: 0.125,
+						ease: "power2.inOut",
+					})
+
+					// UKRAINIAN
+					.to("#hello-ua", {
+						opacity: 1,
+						duration: 0,
+						ease: "power2.inOut",
+					})
+					.to("#hello-ua", {
+						opacity: 0,
+						duration: 0,
+						delay: 0.125,
+						ease: "power2.inOut",
+					})
+
+					// SPANISH
+					.to("#hello-es", {
+						opacity: 1,
+						duration: 0,
+						ease: "power2.inOut",
+					})
+					.to("#hello-es", {
+						opacity: 0,
+						duration: 0,
+						delay: 0.125,
+						ease: "power2.inOut",
+					})
+
+					// HINDI
+					.to("#hello-hi", {
+						opacity: 1,
+						duration: 0,
+						ease: "power2.inOut",
+					})
+					.to("#hello-hi", {
+						opacity: 1,
+						duration: 0,
+						delay: 0.35,
 						ease: "power2.inOut",
 					});
 			} else {

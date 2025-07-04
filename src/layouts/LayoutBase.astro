@@ -83,14 +83,12 @@ const { frontmatter } = Astro.props;
 			document
 				.querySelector("#toggleIcon")
 				?.classList.replace("ri-sun-fill", "ri-moon-fill");
-			(document.querySelector("#SMLogo") as any).src =
-				"/SMLogoW.svg";
+			(document.querySelector("#SMLogo") as any).src = "/SMLogoW.svg";
 		} else {
 			document
 				.querySelector("#toggleIcon")
 				?.classList.replace("ri-moon-fill", "ri-sun-fill");
-			(document.querySelector("#SMLogo") as any).src =
-				"/SMLogo.svg";
+			(document.querySelector("#SMLogo") as any).src = "/SMLogo.svg";
 		}
 	};
 
@@ -121,12 +119,12 @@ const { frontmatter } = Astro.props;
 		font-style: normal;
 	}
 	.satoshi-<uniquifier > {
-		font-family: 'Satoshi', sans-serif;
+		font-family: "Satoshi", sans-serif;
 		font-optical-sizing: auto;
 		font-weight: <weight>;
 		font-style: normal;
 	}
 	* {
-		font-family: "Satoshi";
+		font-family: "Open Sans", sans-serif;
 	}
 </style>

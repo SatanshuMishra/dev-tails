@@ -1,7 +1,3 @@
----
-
----
-
 <div
 	id="preloader"
 	class="fixed inset-0 bg-[#010409] dark:bg-[#010409] z-[9999] flex items-center justify-center"
@@ -23,7 +19,7 @@
 	if (window.location.pathname === "/" || window.location.pathname === "") {
 		document.addEventListener("DOMContentLoaded", () => {
 			// PRELOADER NEED TO ONLY BE SHOWN ON THE FIRST LOAD OF THE PAGE
-			const hasSeenPreloader = localStorage.getItem("hasSeenPreloader");
+			const hasSeenPreloader = false;
 
 			// CASE 1: IF NOT SEEN, SHOW PRELOADER
 			if (!hasSeenPreloader) {
@@ -32,7 +28,7 @@
 					onComplete: () => {
 						// MOVE PRELOADER UPWARDS ONCE ANIMATION IS COMPLETE
 						gsap.to("#preloader", {
-							opacity: 0,
+							opacity: 1,
 							duration: 1,
 							y: "-100%",
 							easer: "power2.inOut",
@@ -49,16 +45,18 @@
 					},
 				});
 				// ANIMATE THE HELLO TEXT
-				gsap.to("#hello-text", {
-					opacity: 1,
-					duration: 1,
-					ease: "power2.inOut",
-				}).to("#hello-text", {
-					opacity: 0,
-					duration: 1,
-					delay: 1,
-					ease: "power2.inOut",
-				});
+				timeline
+					.to("#hello-text", {
+						opacity: 1,
+						duration: 1,
+						ease: "power2.inOut",
+					})
+					.to("#hello-text", {
+						opacity: 1,
+						duration: 1,
+						delay: 1,
+						ease: "power2.inOut",
+					});
 			} else {
 				// HIDE PRELOADER IF ALREADY SEEN BY USER
 				document.getElementById("preloader").style.display = "none";

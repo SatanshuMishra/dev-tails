@@ -1,0 +1,16 @@
+---
+import "remixicon/fonts/remixicon.css";
+
+type Props = {
+	iconClass?: string;
+};
+
+const { iconClass = "" }: Props = Astro.props;
+---
+
+<div
+	class="px-3 py-2 border-solid border-2 border-gray-400 rounded-xl text-[1.4rem] w-fit hover:border-blue-500 text-black dark:text-white hover:text-blue-500 hover:cursor-default hover:scale-105 transition-all duration-200 ease-in-out flex flex-row gap-2 items-center"
+>
+	{iconClass && <i class={iconClass} />}
+	<slot />
+</div>

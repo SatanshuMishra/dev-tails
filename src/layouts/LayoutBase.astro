@@ -1,6 +1,6 @@
 ---
 import Footer from "../components/Footer.astro";
-
+import  SpeedInsights  from "@vercel/speed-insights/astro"
 const { frontmatter } = Astro.props;
 ---
 
@@ -52,6 +52,7 @@ const { frontmatter } = Astro.props;
 		<title>{frontmatter.title}</title>
 	</head>
 	<body>
+		<SpeedInsights/>
 		<slot />
 		<Footer />
 	</body>

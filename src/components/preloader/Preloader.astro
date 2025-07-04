@@ -3,11 +3,69 @@
 ---
 
 <div
+	id="preloader"
 	class="fixed inset-0 bg-[#010409] dark:bg-[#010409] z-[9999] flex items-center justify-center"
 >
 	<div class="text-center">
 		<h2 id="hello-text" class="text-6xl font-bold text-white opacity-0">
-			Hello<h2></h2>
+			Hello
 		</h2>
 	</div>
 </div>
+
+<script
+	is:inline
+	src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"
+></script>
+
+<script is:inline>
+	// CHECK PATH MATCHES HOMEPAGE SINCE WE ONLY WANT THIS TO RUN ON THE HOMEPAGE
+	if (window.location.pathname === "/" || window.location.pathname === "") {
+		document.addEventListener("DOMContentLoaded", () => {
+			// PRELOADER NEED TO ONLY BE SHOWN ON THE FIRST LOAD OF THE PAGE
+			const hasSeenPreloader = localStorage.getItem("hasSeenPreloader");
+
+			// CASE 1: IF NOT SEEN, SHOW PRELOADER
+			if (!hasSeenPreloader) {
+				// INITIATE GSAP TIMELINE
+				const timeline = gsap.timeline({
+					onComplete: () => {
+						// MOVE PRELOADER UPWARDS ONCE ANIMATION IS COMPLETE
+						gsap.to("#preloader", {
+							opacity: 0,
+							duration: 1,
+							y: "-100%",
+							easer: "power2.inOut",
+							onComplete: () => {
+								// REMOVE PRELOADER FROM DOM ONCE ANIMATION IS COMPLETE
+								document.getElementById("preloader").remove();
+								// SET LOCAL STORAGE TO TRUE SO WE DON'T SHOW PRELOADER AGAIN
+								localStorage.setItem(
+									"hasSeenPreloader",
+									"true",
+								);
+							},
+						});
+					},
+				});
+				// ANIMATE THE HELLO TEXT
+				gsap.to("#hello-text", {
+					opacity: 1,
+					duration: 1,
+					ease: "power2.inOut",
+				}).to("#hello-text", {
+					opacity: 0,
+					duration: 1,
+					delay: 1,
+					ease: "power2.inOut",
+				});
+			} else {
+				// HIDE PRELOADER IF ALREADY SEEN BY USER
+				document.getElementById("preloader").style.display = "none";
+			}
+		});
+	} else {
+		// HIDE PRELOADER IF NOT ON HOMEPAGE
+		document.getElementById("preloader").style.display = "none";
+	}
+</script>

@@ -46,10 +46,10 @@
 	if (window.location.pathname === "/" || window.location.pathname === "") {
 		document.addEventListener("DOMContentLoaded", () => {
 			// PRELOADER NEED TO ONLY BE SHOWN ON THE FIRST LOAD OF THE PAGE
-			const hasSeenPreloader = false;
+			// const hasSeenPreloader = localStorage.getItem("hasSeenPreloader");
 
 			// CASE 1: IF NOT SEEN, SHOW PRELOADER
-			if (!hasSeenPreloader) {
+			if (true) {
 				// INITIATE GSAP TIMELINE
 				const timeline = gsap.timeline({
 					onComplete: () => {
@@ -63,10 +63,7 @@
 								// REMOVE PRELOADER FROM DOM ONCE ANIMATION IS COMPLETE
 								document.getElementById("preloader").remove();
 								// SET LOCAL STORAGE TO TRUE SO WE DON'T SHOW PRELOADER AGAIN
-								localStorage.setItem(
-									"hasSeenPreloader",
-									"true",
-								);
+								//localStorage.setItem("hasSeenPreloader", true);
 							},
 						});
 					},

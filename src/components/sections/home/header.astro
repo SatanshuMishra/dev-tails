@@ -1,3 +1,7 @@
+---
+import AnimatedButton from "../../ui/AnimatedButton.astro";
+---
+
 <section
 	class="flex flex-row justify-center items-center w-full bg-white dark:bg-[#010409]"
 >
@@ -62,70 +66,72 @@
 					<p>Curriculum Vitae</p>
 				</div>
 			</a>
+			<AnimatedButton text="Example Button" />
 		</div>
 	</section>
+
+	<style>
+		.gradient-text {
+			background: linear-gradient(180deg, #5d95e9 0%, #397aec 100%);
+			-webkit-background-clip: text;
+			background-clip: text;
+			color: transparent;
+			display: inline-block;
+		}
+	</style>
+
+	<!-- Add GSAP CDN -->
+	<script
+		is:inline
+		src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"
+	></script>
+
+	<!-- Add Typed.js CDN -->
+	<script is:inline src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"
+	></script>
+
+	<script is:inline>
+		// Wait for DOM to be loaded
+		document.addEventListener("DOMContentLoaded", function () {
+			// Initialize Typed.js
+			let typed = new Typed("#skills-n-interests", {
+				strings: [
+					"SOFTWARE DEVELOPER",
+					"CYBERSECURITY ENTHUSIAST",
+					"SPACE AFICIONADO",
+				],
+				typeSpeed: 40,
+				backSpeed: 40,
+				smartBackspace: true,
+				backDelay: 2000,
+				shuffle: false,
+				loop: true,
+				loopCount: Infinity,
+				showCursor: false,
+			});
+
+			// Initialize GSAP animations
+			const revealElements = document.querySelectorAll(".reveal-element");
+
+			// Create a timeline for sequential animations
+			const tl = gsap.timeline({
+				defaults: { duration: 1, ease: "power3.out" },
+			});
+
+			// Add each element to the timeline with stagger
+			tl.to(revealElements, {
+				x: 0,
+				opacity: 1,
+				duration: 1,
+				stagger: 0.2,
+				ease: "power3.out",
+				onComplete: () => {
+					// Remove inline styles after animation
+					revealElements.forEach((element) => {
+						element.style.transform = "none";
+					});
+				},
+			});
+		});
+	</script>
 </section>
-
-<style>
-	.gradient-text {
-		background: linear-gradient(180deg, #5d95e9 0%, #397aec 100%);
-		-webkit-background-clip: text;
-		background-clip: text;
-		color: transparent;
-		display: inline-block;
-	}
-</style>
-
-<!-- Add GSAP CDN -->
-<script
-	is:inline
-	src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"
-></script>
-
-<!-- Add Typed.js CDN -->
-<script is:inline src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
-
-<script is:inline>
-	// Wait for DOM to be loaded
-	document.addEventListener("DOMContentLoaded", function () {
-		// Initialize Typed.js
-		let typed = new Typed("#skills-n-interests", {
-			strings: [
-				"SOFTWARE DEVELOPER",
-				"CYBERSECURITY ENTHUSIAST",
-				"SPACE AFICIONADO",
-			],
-			typeSpeed: 40,
-			backSpeed: 40,
-			smartBackspace: true,
-			backDelay: 2000,
-			shuffle: false,
-			loop: true,
-			loopCount: Infinity,
-			showCursor: false,
-		});
-
-		// Initialize GSAP animations
-		const revealElements = document.querySelectorAll(".reveal-element");
-
-		// Create a timeline for sequential animations
-		const tl = gsap.timeline({
-			defaults: { duration: 1, ease: "power3.out" },
-		});
-
-		// Add each element to the timeline with stagger
-		tl.to(revealElements, {
-			x: 0,
-			opacity: 1,
-			duration: 1,
-			stagger: 0.2,
-			ease: "power3.out",
-			onComplete: () => {
-				// Remove inline styles after animation
-				revealElements.forEach((element) => {
-					element.style.transform = "none";
-				});
-			},
-		});
-	});
-</script>

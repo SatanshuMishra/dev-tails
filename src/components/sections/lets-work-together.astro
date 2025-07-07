@@ -1,0 +1,174 @@
+---
+export interface Props {
+  subtitle?: string;
+  line1?: string;
+  line2?: string;
+}
+
+const { 
+  subtitle = "Is Your Big Idea Ready to Go Wild?",
+  line1 = "Let's work",
+  line2 = "together!"
+} = Astro.props;
+
+const line1Chars = line1.split('');
+const line2Chars = line2.split('');
+---
+
+<section class="hero-section">
+  <div class="hero-content">
+    <p class="subtitle">{subtitle}</p>
+    
+    <h2 class="main-title">
+      <span class="block">
+        {line1Chars.map((char) => (
+          <span class="char-wrapper">
+            <span class="char">{char}</span>
+            <span class="char char-duplicate">{char}</span>
+          </span>
+        ))}
+      </span>
+      <span class="block">
+        {line2Chars.map((char) => (
+          <span class="char-wrapper">
+            <span class="char">{char}</span>
+            <span class="char char-duplicate">{char}</span>
+          </span>
+        ))}
+      </span>
+    </h2>
+  </div>
+</section>
+
+<style>
+  .hero-section {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+  }
+
+  .hero-content {
+    text-align: center;
+  }
+
+  .subtitle {
+    font-size: 1.5rem;
+    color: black;
+    font-weight: normal;
+    margin-bottom: 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .subtitle {
+      font-size: 1.875rem;
+    }
+  }
+
+  .main-title {
+    font-size: 3.75rem;
+    color: black;
+    font-weight: normal;
+    line-height: 1.2;
+    letter-spacing: 0.12em;
+  }
+
+  @media (min-width: 768px) {
+    .main-title {
+      font-size: 6rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .main-title {
+      font-size: 10vw;
+    }
+  }
+
+  .block {
+    display: block;
+  }
+
+  .char-wrapper {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    height: 1.20em;
+    vertical-align: bottom;
+    margin-right: -0.15em;
+  }
+
+  .char-wrapper:nth-child(5) {
+    margin-right: 0.2em;
+  }
+
+  .block:last-child .char-wrapper {
+    margin-right: -0.15em;
+  }
+
+  .char {
+    display: inline-block;
+    position: relative;
+    will-change: transform;
+  }
+
+  .char-duplicate {
+    position: absolute;
+    top: 100%;
+    left: 0;
+  }
+</style>
+
+<script>
+  import gsap from 'gsap';
+
+  const letsChars = Array.from(document.querySelectorAll('.char-wrapper')).slice(0, 5);
+  const workChars = Array.from(document.querySelectorAll('.char-wrapper')).slice(5, 10);
+  const togetherChars = Array.from(document.querySelectorAll('.char-wrapper')).slice(10, 19);
+  
+  const animationGroups = [
+    [letsChars[0], workChars[1], togetherChars[2]],
+    [letsChars[1], workChars[0], togetherChars[0]],
+    [letsChars[2], workChars[2], togetherChars[4]],
+    [letsChars[3], workChars[3], togetherChars[6]],
+    [letsChars[4], workChars[4], togetherChars[8]]
+  ];
+  
+  let currentGroupIndex = 0;
+  
+  function animateCurrentGroup() {
+    const currentGroup = animationGroups[currentGroupIndex];
+    const tl = gsap.timeline();
+    
+    currentGroup.forEach(wrapper => {
+      const chars = wrapper.querySelectorAll('.char');
+      
+      tl.to(chars[0], {
+        y: "-105%",
+        duration: 0.4,
+        ease: "power2.in"
+      }, 0)
+      .to(chars[1], {
+        y: "-105%",
+        duration: 0.4,
+        ease: "power2.out"
+      }, 0.1)
+      .set(chars, { y: 0 }, 0.5)
+      .call(() => {
+        wrapper.appendChild(chars[0]);
+        // Fix classes after reordering
+        wrapper.children[0].classList.remove('char-duplicate');
+        wrapper.children[1].classList.add('char-duplicate');
+      }, [], 0.5);
+    });
+    
+    currentGroupIndex = (currentGroupIndex + 1) % animationGroups.length;
+  }
+  
+  gsap.delayedCall(1, () => {
+    animateCurrentGroup();
+    setInterval(animateCurrentGroup, 2000);
+  });
+</script>

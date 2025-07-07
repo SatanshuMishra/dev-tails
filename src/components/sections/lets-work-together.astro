@@ -158,7 +158,7 @@ const line2Chars = line2.split('');
       .set(chars, { y: 0 }, 0.5)
       .call(() => {
         wrapper.appendChild(chars[0]);
-        // Fix classes after reordering
+
         wrapper.children[0].classList.remove('char-duplicate');
         wrapper.children[1].classList.add('char-duplicate');
       }, [], 0.5);

@@ -1,0 +1,106 @@
+<div
+  id="scroll-indicator"
+  class="fixed w-[6px] h-[20vh] top-[40vh] right-4 bg-[#d8d8e0] rounded-[3px] opacity-0 pointer-events-none z-50"
+>
+  <div
+    id="scroll-indicator-bar"
+    class="absolute w-full bg-black rounded-[3px] transform origin-top"
+  >
+  </div>
+</div>
+
+<script>
+ import { gsap } from "gsap";
+  document.addEventListener("DOMContentLoaded", () => {
+    initScrollIndicator();
+
+    function initScrollIndicator() {
+      const scrollIndicator = document.getElementById("scroll-indicator");
+      const scrollIndicatorBar = document.getElementById(
+        "scroll-indicator-bar"
+      );
+
+      if (!scrollIndicator || !scrollIndicatorBar) {
+        return;
+      }
+
+      let isScrolling: ReturnType<typeof setTimeout> | undefined;
+      let fadeTimeout: ReturnType<typeof setTimeout> | undefined;
+
+      gsap.set(scrollIndicator, { opacity: 1 });
+
+      const updateScrollIndicator = () => {
+        const scrollTop = window.scrollY;
+        const docHeight = document.body.scrollHeight;
+        const winHeight = window.innerHeight;
+
+        if (docHeight <= winHeight) {
+          gsap.set(scrollIndicator, { opacity: 0 });
+          return;
+        }
+
+        const scrollPercent = scrollTop / (docHeight - winHeight);
+        const scrollIndicatorHeight = scrollIndicator.offsetHeight;
+
+        const barHeight = Math.max(
+          scrollIndicatorHeight * (winHeight / docHeight),
+          30
+        );
+
+        const maxTravel = scrollIndicatorHeight - barHeight;
+        const barPosition = scrollPercent * maxTravel;
+
+        gsap.set(scrollIndicatorBar, {
+          height: barHeight,
+          y: barPosition,
+        });
+      };
+
+      updateScrollIndicator();
+
+      fadeTimeout = setTimeout(() => {
+        gsap.to(scrollIndicator, { opacity: 0, duration: 0.8 });
+      }, 2000);
+
+      window.addEventListener("scroll", () => {
+        clearTimeout(isScrolling);
+        clearTimeout(fadeTimeout);
+
+        gsap.to(scrollIndicator, { opacity: 1, duration: 0.3 });
+        updateScrollIndicator();
+
+        isScrolling = setTimeout(() => {
+          gsap.to(scrollIndicator, { opacity: 0, duration: 0.8 });
+        }, 1500);
+      });
+
+      window.addEventListener("resize", updateScrollIndicator);
+      window.addEventListener("load", updateScrollIndicator);
+
+      if (typeof MutationObserver !== "undefined") {
+        const observer = new MutationObserver(updateScrollIndicator);
+        observer.observe(document.body, {
+          childList: true,
+          subtree: true,
+          attributes: true,
+          characterData: true,
+        });
+      }
+    }
+  });
+</script>
+
+<style>
+  /* Mobile responsiveness */
+  @media (max-width: 812px) {
+    #scroll-indicator {
+      width: 2px;
+      border-radius: 1px;
+      right: 6px;
+    }
+
+    #scroll-indicator-bar {
+      border-radius: 1px;
+    }
+  }
+</style>

@@ -1,0 +1,129 @@
+---
+import "remixicon/fonts/remixicon.css";
+
+interface Props {
+  text: string;
+  hoverColor?: string;
+  href?: string;
+}
+
+const { text = "Button", hoverColor = "#0062ff", href = "#" } = Astro.props;
+---
+
+<a
+  href={href}
+  class="dot-button relative inline-flex items-center justify-center py-3 px-10 overflow-hidden cursor-pointer no-underline font-medium text-black text-xl rounded-full shadow-xl bg-white"
+>
+  <span class="dot"></span>
+  <div class="content-wrapper">
+    <span class="text relative z-10">{text}</span>
+    <span class="arrow relative z-10 text-3xl invisible"><i class="ri-arrow-right-line"></i></span>
+  </div>
+</a>
+
+<style define:vars={{ hoverColor }}>
+  .dot-button {
+    position: relative;
+    white-space: nowrap;
+  }
+
+  .dot {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    width: 8px;
+    height: 8px;
+    background-color: #000;
+    border-radius: 50%;
+    z-index: 1;
+    transform: translateY(-50%);
+  }
+
+  .content-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 10;
+  }
+
+  .text {
+    position: relative;
+	left: 5px;
+    transform: translateX(0);
+  }
+
+  .arrow {
+    position: absolute;
+    right: -40px;
+    opacity: 0;
+  }
+</style>
+
+<script>
+  import { gsap } from "gsap";
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const buttons = document.querySelectorAll(".dot-button");
+
+    buttons.forEach((button) => {
+      const dot = button.querySelector(".dot");
+      const text = button.querySelector(".text");
+      const arrow = button.querySelector(".arrow");
+      const buttonElement = button as HTMLElement;
+      const buttonWidth = buttonElement.offsetWidth;
+      const buttonHeight = buttonElement.offsetHeight;
+
+      const maxSize =
+        Math.max(Math.sqrt(Math.pow(buttonWidth, 2) + Math.pow(buttonHeight, 2)) * 2.2, buttonWidth * 1.8);
+
+      const tl = gsap.timeline({ paused: true });
+
+      tl.to(
+        dot,
+        {
+          width: maxSize,
+          height: maxSize,
+          backgroundColor: (button as HTMLElement).style.getPropertyValue("--hoverColor"),
+          duration: 1.5,
+          ease: "power2.out",
+          transform: "translate(-50%, -50%)",
+        },
+        0
+      );
+
+      tl.to(
+        text,
+        {
+          color: "#FFFFFF",
+          x: -20,
+          duration: 0.6,
+          ease: "power1.out",
+        },
+        0
+      );
+
+      tl.to(
+        arrow,
+        {
+		  color: "#FFFFFF",
+          opacity: 1,
+          visibility: "visible",
+          right: -28,
+          duration: 0.6,
+          ease: "power1.out",
+        },
+        0
+      );
+
+      button.addEventListener("mouseenter", () => {
+        tl.play();
+      });
+
+      button.addEventListener("mouseleave", () => {
+        tl.timeScale(1.45);
+        tl.reverse();
+      });
+    });
+  });
+</script>
